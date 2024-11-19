@@ -1,0 +1,42 @@
+
+.dashboard__wrapper {
+    min-height: 100vh;
+
+    .dashboard__header {
+        margin-top: 98px;
+        height: 250px;
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        &::before {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            content: "";
+            opacity: 30%;
+            /* backdrop-filter: blur(40000px) #1E1E1E; */
+            background-color: #1E1E1E;
+        }
+
+        h2 {
+            text-align: center;
+            color: #ffffff;
+            z-index: 200;
+            font-family: "Crimson Text" "san-serif";
+            font-size: 36px;
+            font-weight: 400;
+        }
+    }
+}
+
+.dashboard__content {
+    overflow: hidden !important;
+}
