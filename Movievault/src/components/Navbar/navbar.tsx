@@ -1,4 +1,3 @@
-import React from 'react'
 import './navbar.css'
 import Logo from '../../assets/Navbar/logo.png'
 import { AccountIcon, Home, SearchIcon } from '../../assets/svg/svg-export'

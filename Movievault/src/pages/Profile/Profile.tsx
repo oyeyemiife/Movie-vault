@@ -1,4 +1,3 @@
-import React from 'react';
 import { StreakIcon } from '../../assets/svg/svg-export';
 import './profile.css';
 import { Layout } from '../../components/Dashboard/layout';

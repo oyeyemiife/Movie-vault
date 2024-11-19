@@ -1,4 +1,3 @@
-import React from 'react';
 import { Moviecard } from '../MovieCard/Moviecard';
 import './landingpage.css' 
 // import {Navbar} from '../../components/Navbar/navbar'
