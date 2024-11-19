@@ -1,6 +1,6 @@
 import React from 'react';
 import { Moviecard } from '../MovieCard/Moviecard';
-import './landingpage.css'
+import './landingpage.css' 
 // import {Navbar} from '../../components/Navbar/navbar'
 import { Layout } from '../../components/Dashboard/layout';
 import background from '../../assets/Navbar/back.webp'
