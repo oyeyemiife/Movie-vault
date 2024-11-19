@@ -1,55 +1,35 @@
 import { Moviecard } from '../MovieCard/Moviecard';
 import './landingpage.css' 
-// import {Navbar} from '../../components/Navbar/navbar'
+import { useEffect, useState } from 'react';
+import { fetchTrendingMovies } from './tmdbservice';
 import { Layout } from '../../components/Dashboard/layout';
 import background from '../../assets/Navbar/back.webp'
 
-const movies = [
-  {
-    title: "Inception",
-    posterUrl: "https://m.media-amazon.com/images/M/MV5BMTM0MjUzNjkwMl5BMl5BanBnXkFtZTcwNjY0OTk1Mw@@._V1_.jpg",
-    year: "2010",
-    rating: 8.8,
-    genre: "Sci-Fi",
-  },
-  {
-    title: "Inception",
-    posterUrl: "https://m.media-amazon.com/images/M/MV5BMTM0MjUzNjkwMl5BMl5BanBnXkFtZTcwNjY0OTk1Mw@@._V1_.jpg",
-    year: "2010",
-    rating: 8.8,
-    genre: "Sci-Fi",
-  },
-  {
-    title: "Inception",
-    posterUrl: "https://m.media-amazon.com/images/M/MV5BMTM0MjUzNjkwMl5BMl5BanBnXkFtZTcwNjY0OTk1Mw@@._V1_.jpg",
-    year: "2010",
-    rating: 8.8,
-    genre: "Sci-Fi",
-  },
-  {
-    title: "Inception",
-    posterUrl: "https://m.media-amazon.com/images/M/MV5BMTM0MjUzNjkwMl5BMl5BanBnXkFtZTcwNjY0OTk1Mw@@._V1_.jpg",
-    year: "2010",
-    rating: 8.8,
-    genre: "Sci-Fi",
-  },
-  {
-    title: "Inception",
-    posterUrl: "https://m.media-amazon.com/images/M/MV5BMTM0MjUzNjkwMl5BMl5BanBnXkFtZTcwNjY0OTk1Mw@@._V1_.jpg",
-    year: "2010",
-    rating: 8.8,
-    genre: "Sci-Fi",
-  },
-  {
-    title: "The Dark Knight",
-    posterUrl: "https://image.tmdb.org/t/p/w500/1hRoyzDtpgMU7Dz4JF22RANzQO7.jpg",
-    year: "2006",
-    rating: 9.0,
-    genre: "Action",
-  },
-];
 
+
+interface MovieWithGenres {
+    id: number;
+    title: string;
+    poster_path: string;
+    overview: string;
+    release_date: string;
+    genreNames: string;
+    vote_average: number;
+  }
 export const Landingpage = () => {
+
+    const [movies, setMovies] = useState<MovieWithGenres[]>([]);
+
+  useEffect(() => {
+    const getMovies = async () => {
+      const moviesData = await fetchTrendingMovies();
+      setMovies(moviesData);
+    };
+
+    getMovies();
+  }, []);
+
+  
   const handleCardClick = (title: string) => {
     alert(`You clicked on ${title}`);
   };
@@ -58,51 +38,37 @@ export const Landingpage = () => {
     <Layout headerText="Your Gateway to Unlimited Cinema Magic!" headerBg={background}>
         <div className='homecontainer'>
             <div className='sdf'>
-                <div className='recommendation'>
-                    <p>
-                        Sci-fi
-                    </p>
-                </div>
-                <div className='recommendation'>
-                    <p>
-                        Animation
-                    </p>
-                </div>
-                <div className='recommendation'>
-                    <p>
-                        Thriller
-                    </p>
-                </div>
-                <div className='recommendation'>
-                    <p>
-                        Romance
-                    </p>
-                </div>
-                <div className='recommendation'>
-                    <p>
-                        Comedy
-                    </p>
-                </div>
-                <div className='recommendation'>
-                    <p>
-                        Action
-                    </p>
-                </div>
-                <div className='recommendation'>
-                    <p>
-                        Crime
-                    </p>
-                </div>
+            {[ 'Action',
+                'Adventure',
+                'Animation',
+                'Comedy',
+                'Crime',
+                'Documentary',
+                'Drama',
+                'Family',
+                'Fantasy',
+                'History',
+                'Horror',
+                'Mystery',
+                'Romance',
+                'Science Fiction',
+                'Thriller',
+                'Western'
+            ].map((category) => (
+            <div key={category} className="recommendation">
+              <p>{category}</p>
+            </div>
+          ))}
             </div>
         <div className='movies'>
-      {movies.map((movie, index) => (
+      {movies.map((movie:any) => (
         <Moviecard
-          key={index}
+          key={movie.id}
           title={movie.title}
-          posterUrl={movie.posterUrl}
-          year={movie.year}
-          rating={movie.rating}
-          genre={movie.genre}
+          posterUrl={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+          year={movie.release_date ? movie.release_date.split('-')[0] : 'N/A'}
+          rating={movie.vote_average}
+          genre={movie.genreNames}
           onClick={() => handleCardClick(movie.title)}
         />
       ))}

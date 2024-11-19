@@ -2,10 +2,11 @@
     font-family: 'Crimson Text';
 }
 .sdf{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
     justify-content: space-evenly;
     padding: 20px;
-    /* gap: 10px; */
+    gap: 10px;
 }
 .recommendation{
     background-image: linear-gradient(to right, rgba(117, 154, 148, 0.99) , rgba(40, 49, 48, 0.99));
