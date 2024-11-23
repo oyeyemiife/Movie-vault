@@ -1,7 +1,7 @@
 .profilecontainer {
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
+    padding-top: 130px;
     font-family: "Crimson Text", serif;
   }
   
@@ -22,7 +22,10 @@
   }
   
   .profile-details {
-    padding: 0 20px;
+    /* padding: 0 20px; */
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
   }
   
   .profile-section {

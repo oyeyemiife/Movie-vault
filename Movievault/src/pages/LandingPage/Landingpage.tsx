@@ -37,7 +37,7 @@ export const Landingpage = () => {
   return (
     <Layout headerText="Your Gateway to Unlimited Cinema Magic!" headerBg={background}>
         <div className='homecontainer'>
-            <div className='sdf'>
+            <div className='genre'>
             {[ 'Action',
                 'Adventure',
                 'Animation',

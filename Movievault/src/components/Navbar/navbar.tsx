@@ -1,8 +1,18 @@
 import './navbar.css'
 import Logo from '../../assets/Navbar/logo.png'
-import { AccountIcon, Home, SearchIcon } from '../../assets/svg/svg-export'
+import { AccountIcon, Home, SearchIcon, StreakIcon } from '../../assets/svg/svg-export'
+import { useNavigate } from 'react-router-dom'
 
 export const Navbar = () => {
+  const navigate = useNavigate();
+
+  const handleAccount = () => {
+    navigate('/profile'); 
+  };
+
+  const handleClick = () => {
+    navigate('/landingpage'); 
+  };
   return (
     <nav className='nav'>
         <div className='imagecontainer'>
@@ -11,22 +21,24 @@ export const Navbar = () => {
         </div>
         <div className='navicon'>
             <div className='display'>
-            <form 
-            // onSubmit={onSubmitClickedHandler}
-            >
+            <form>
               <input
                 name="search"
                 id="search"
                 placeholder="Search for Movies..."
-                // onChange={onChangeHandler}
               />
-              <button title='search' type="submit">
+            </form>
+            <button title='search' type="submit">
                 <SearchIcon />
               </button>
-            </form>
             </div>
+            <div onClick={handleClick}>
             <Home/>
+            </div>
+            <div onClick={handleAccount}>
             <AccountIcon/>
+            </div>
+            <StreakIcon/>
         </div>
     </nav>
   )

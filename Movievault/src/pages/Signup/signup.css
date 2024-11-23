@@ -1,0 +1,135 @@
+
+ .userdetails{
+    width: 50%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+ .details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.movievault{
+    font-family: "Crimson Text", serif;
+    color: #000000;
+    font-size: 26px;
+    margin-bottom: 50px;
+    font-weight: 600;
+  }
+.signinform input{
+    background: #577870;
+    outline: none;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    border-radius: 3px;
+    padding: 10px 5px;
+    font-family: "Crimson Text", serif;
+    width: 100%;
+    font-weight: 500;
+    color: #000000;
+    margin-bottom: 20px;
+  }
+  input::placeholder{
+    color: #000000;
+  }
+  .signinform label{
+    display: inline-block;
+    margin-bottom: 5px;
+    font-size: 20px;
+  }
+  .button{
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: 'Raleway';
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #577870;
+  }
+  .signinbutton{
+    width: 30%;
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+    font-family: "Crimson Text", serif;
+
+  }
+.signincontainer{
+  display: flex;
+  height: 100vh;
+}
+.sideform{
+  position: relative;
+  background-image:url("../../assets/Navbar/background.webp");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 50%;
+  overflow: hidden; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sideform::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(86, 110, 106, 0.85); 
+  z-index: 1; 
+}
+.signin{
+padding: 10px;
+}
+.signinoption{
+  font-family: "Crimson Text", serif;
+    color: #000000;
+    font-size: 20px;
+    margin-bottom: 50px;
+}
+.signin-button{
+    font-size: 20px;
+    font-weight: 500;
+    font-family: "Crimson Text", serif;
+    background-color: #ffffff;
+    color: #0c2d6b;
+    border: none;
+    cursor: pointer;
+}
+@media (max-width: 480px) {
+  .sideform {
+    display: none; 
+    visibility: hidden;
+  }
+  .sideform::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0; 
+  }
+  .signincontainer {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+  }
+  .userdetails {
+    width: 100%; 
+    padding: 0px; 
+    box-sizing: border-box; 
+  }
+}

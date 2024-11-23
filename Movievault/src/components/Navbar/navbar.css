@@ -27,7 +27,6 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    cursor: pointer;
 
     p {
       font-family: "Crimson Text", serif;
@@ -36,13 +35,14 @@
     }
 }
 .navicon{
-    display: flex;
-    gap: 25px;
-    align-items: center;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  text-align: center;
 
-    svg {
-      cursor: pointer;
-    }
+  svg {
+    cursor: pointer;
+  }
 }
 .display{
   background-color: #729490fc;
@@ -65,11 +65,30 @@ input{
   font-style: italic;
   font-weight: 500;
   color: #000000;
-
 }
 
-.display form button {
+.display button {
   background-color: #729490fc;
   border: none;
   border-radius: 10px;
+}
+@media (max-width: 480px) {
+.navicon {
+  gap: 5px;
+}
+.imagecontainer{
+  gap: 0px;
+    p {
+    font-size: 20px;
+  }
+}
+.display form {
+  display: none;
+}
+.display{
+  background-color: #56706dfc;
+}
+.display button {
+  background-color: #56706dfc;
+}
 }
