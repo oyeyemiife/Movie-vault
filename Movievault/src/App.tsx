@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Landingpage } from './pages/LandingPage/Landingpage'
 import { Profile} from './pages/Profile/Profile'
 import { Signup } from './pages/Signup/signup'
-import { Signin } from './pages/Signin/signin'
+import { Signin } from './pages/Signin/Signin'
 import './App.css'
 
 function App() {
