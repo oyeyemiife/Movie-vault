@@ -1,9 +1,10 @@
 import { Moviecard } from '../MovieCard/Moviecard';
 import './landingpage.css' 
 import { useEffect, useState, useRef } from 'react';
-import { fetchTrendingMovies } from './tmdbservice';
+import { fetchTrendingMovies, searchMovies } from './tmdbservice';
 import { Layout } from '../../components/Dashboard/layout';
 import background from '../../assets/Navbar/back.webp'
+import { useLocation } from 'react-router-dom';
 
 
 
@@ -17,11 +18,30 @@ interface MovieWithGenres {
     vote_average: number;
   }
 export const Landingpage = () => {
-
-    const [movies, setMovies] = useState<MovieWithGenres[]>([]);
-    const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
-
+  
+  const location = useLocation();
+  const query = location.state?.query || ''; 
+  const searchResults = location.state?.results || []; 
+  const [movies, setMovies] = useState<MovieWithGenres[]>(searchResults);
+  const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
+    
     const genreContainerRef = useRef<HTMLDivElement>(null);
+
+
+    useEffect(() => {
+      const fetchMovies = async () => {
+        if (query) {
+          const searchResults = await searchMovies(query); 
+          setMovies(searchResults);
+        } else {
+          const trendingMovies = await fetchTrendingMovies(); 
+          setMovies(trendingMovies);
+        }
+      };
+  
+      fetchMovies();
+    }, [query]);
+
 
 const scrollCategory = (scrollOffset: number) => {
   if (genreContainerRef.current) {
@@ -50,32 +70,52 @@ const scrollCategory = (scrollOffset: number) => {
       'Thriller',
       'Western'
     ];
-  useEffect(() => {
-    const getMovies = async () => {
-      const moviesData = await fetchTrendingMovies();
-      setMovies(moviesData);
-    };
 
-    getMovies();
-  }, []);
+    const filteredMovies = selectedGenre
+    ? movies.filter((movie) => movie.genreNames.includes(selectedGenre))
+    : movies;
+
+    const searchParams = new URLSearchParams(location.search);
+    const searchQuery = searchParams.get('search') || '';
+
+    useEffect(() => {
+      const getMovies = async () => {
+        if (searchQuery) {
+          const moviesData = await fetchTrendingMovies(); 
+          setMovies(
+            moviesData.filter((movie: MovieWithGenres) =>
+              movie.title.toLowerCase().includes(searchQuery.toLowerCase())
+            )
+          );
+        } else {
+          const moviesData = await fetchTrendingMovies();
+          setMovies(moviesData);
+        }
+      };
+    
+      getMovies();
+    }, [searchQuery]);
+    
 
   
   const handleCardClick = (title: string) => {
     alert(`You clicked on ${title}`);
   };
 
-  const filteredMovies = selectedGenre
-    ? movies.filter(movie => movie.genreNames.includes(selectedGenre))
-    : movies;
 
   return (
     <Layout headerText="Your Gateway to Unlimited Cinema Magic!" headerBg={background}>
         <div className='homecontainer'>
-            <div className='genre'>
-            <button type='submit' title='scroll' className="scroll-button left" onClick={() => scrollCategory(-600)}>
-        &#8249;
-      </button>
-      <div className="recommendation-container" ref={genreContainerRef}>
+          
+          <div className='genre'>
+            <button 
+            type='submit' 
+            title='scroll' 
+            className="scroll-button left" 
+            onClick={() => scrollCategory(-200)}>
+            &#8249;
+          </button>
+          <div className="recommendation-container" ref={genreContainerRef}>
                 {genres.map((category) => (
               <div key={category} className={`recommendation ${selectedGenre===category? 'active' : ''}`}
               onClick={() => setSelectedGenre(category === selectedGenre ? null : category)}
@@ -84,24 +124,29 @@ const scrollCategory = (scrollOffset: number) => {
                 </div>
               ))}
                 </div>
-                <button type='submit' title='scroll' className="scroll-button right" onClick={() => scrollCategory(600)}>
-        &#8250;
-      </button>
-      </div>
-        <div className='movies'>
-        {filteredMovies.map((movie:MovieWithGenres) => (
-          <Moviecard
-            key={movie.id}
-            title={movie.title}
-            posterUrl={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-            year={movie.release_date ? movie.release_date.split('-')[0] : 'N/A'}
-            rating={movie.vote_average}
-            genre={movie.genreNames}
-            onClick={() => handleCardClick(movie.title)}
-          />
-      ))}
-      </div>
-    </div>
+                <button 
+                type='submit' 
+                title='scroll' 
+                className="scroll-button right" 
+                onClick={() => scrollCategory(200)}>
+                &#8250;
+              </button>
+              </div>
+
+              <div className='movies'>
+                {filteredMovies.map((movie:MovieWithGenres) => (
+                  <Moviecard
+                  key={movie.id}
+                  title={movie.title}
+                  posterUrl={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  year={movie.release_date ? movie.release_date.split('-')[0] : 'N/A'}
+                  rating={movie.vote_average}
+                  genre={movie.genreNames}
+                  onClick={() => handleCardClick(movie.title)}
+                />
+              ))}
+            </div>
+          </div>
     </Layout>
   );
 };

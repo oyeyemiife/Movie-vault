@@ -1,7 +1,15 @@
 import './profile.css';
 import { Navbar } from '../../components/Navbar/navbar';
+import { useNavigate } from 'react-router-dom';
 
 export const Profile = () => {
+
+  const navigate = useNavigate();
+
+  const handleForYou = () => {
+    navigate('/madeforyou'); 
+  };
+
   return (
     <div className="profilecontainer">
       <Navbar/>
@@ -21,7 +29,7 @@ export const Profile = () => {
           </p>
         </div>
 
-        <div className="profile-section">
+        <div className="profile-section" onClick={handleForYou}>
           <p className="profile-title">
             Made for You
           </p>

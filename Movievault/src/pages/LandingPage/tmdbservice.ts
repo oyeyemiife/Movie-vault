@@ -85,3 +85,27 @@ export const fetchMovieDetails = async (movieId: number): Promise<MovieDetails |
     return null;
   }
 };
+
+export const searchMovies = async (query: string): Promise<MovieWithGenres[]> => {
+  if (!query.trim()) return []; 
+
+  try {
+    const response = await axios.get<{ results: Movie[] }>(`${BASE_URL}/search/movie`, {
+      params: {
+        api_key: API_KEY,
+        query, 
+      },
+    });
+
+    const moviesWithGenres: MovieWithGenres[] = response.data.results.map(movie => ({
+      ...movie,
+      genreNames: movie.genre_ids.map((id: any) => getGenreName(id)).join(', '),
+    }));
+
+    return moviesWithGenres;
+  } catch (error) {
+    console.error('Error searching for movies:', error);
+    return [];
+  }
+};
+

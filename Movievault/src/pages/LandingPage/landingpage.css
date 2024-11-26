@@ -72,7 +72,9 @@
     margin-left: 10px;
 }
 @media (max-width: 768px) {
-    .scroll-button{
-        display: none;
+    .recommendation {
+        width: 30px;
+        height: 20px;
+        padding: 40px;
     }
 }

@@ -3,6 +3,7 @@ import { Landingpage } from './pages/LandingPage/Landingpage'
 import { Profile} from './pages/Profile/Profile'
 import { Signup } from './pages/Signup/signup'
 import { Signin } from './pages/Signin/Signin'
+import { Madeforyou } from './pages/Profile/madeforyou'
 import './App.css'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Route path="/signin" element={<Signin/>} />
       <Route path="/landingpage" element={<Landingpage /> } />
       <Route path="/profile" element ={<Profile/>} />
+      <Route path="/madeforyou" element = {<Madeforyou/>} />
     </Routes>
     </BrowserRouter>
   )
