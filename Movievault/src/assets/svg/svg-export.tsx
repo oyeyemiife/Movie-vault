@@ -22,13 +22,13 @@ export const StreakIcon = ({ width, height }: TSvgExports) => (
     <svg
       width={width || "24"}
       height={height || "24"}
-      viewBox="0 0 18 17"
+      viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
         d="M8.04894 1.42705C8.3483 0.505738 9.6517 0.50574 9.95106 1.42705L11.2451 5.40983C11.379 5.82185 11.763 6.10081 12.1962 6.10081H16.3839C17.3527 6.10081 17.7554 7.34043 16.9717 7.90983L13.5838 10.3713C13.2333 10.626 13.0866 11.0773 13.2205 11.4894L14.5146 15.4721C14.8139 16.3934 13.7595 17.1596 12.9757 16.5902L9.58778 14.1287C9.2373 13.874 8.7627 13.874 8.41221 14.1287L5.02426 16.5902C4.24054 17.1596 3.18607 16.3934 3.48542 15.4721L4.7795 11.4894C4.91338 11.0773 4.76672 10.626 4.41623 10.3713L1.02827 7.90983C0.244561 7.34043 0.647338 6.10081 1.61606 6.10081H5.8038C6.23703 6.10081 6.62099 5.82185 6.75486 5.40983L8.04894 1.42705Z"
-        fill="#F4BD62"
+        fill="white"
       />
     </svg>
   );
@@ -80,6 +80,23 @@ export const StreakIcon = ({ width, height }: TSvgExports) => (
 <path d="M9 16C9.85038 16.6303 10.8846 17 12 17C13.1154 17 14.1496 16.6303 15 16" stroke={color||"white"} stroke-width="1.5" stroke-linecap="round" />
 <path d="M22 12.2039V13.725C22 17.6258 22 19.5763 20.8284 20.7881C19.6569 22 17.7712 22 14 22H10C6.22876 22 4.34315 22 3.17157 20.7881C2 19.5763 2 17.6258 2 13.725V12.2039C2 9.91549 2 8.77128 2.5192 7.82274C3.0384 6.87421 3.98695 6.28551 5.88403 5.10813L7.88403 3.86687C9.88939 2.62229 10.8921 2 12 2C13.1079 2 14.1106 2.62229 16.116 3.86687L18.116 5.10812C20.0131 6.28551 20.9616 6.87421 21.4808 7.82274" stroke={color||"white"} stroke-width="1.5" stroke-linecap="round" />
  
+</svg>
+  );
+
+  export const WatchlistIcon = ({width, height, color} : TSvgExports) => (
+    <svg xmlns="http://www.w3.org/2000/svg"
+      width={width || 24} 
+     height={height || 24} 
+     viewBox="0 0 24 24" 
+     fill="none" 
+     stroke={color||"white"}>
+
+<g id="SVGRepo_bgCarrier" stroke-width="0"/>
+
+<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+
+<g id="SVGRepo_iconCarrier"> <circle opacity="0.5" cx="12" cy="12" r="10" stroke={color||"white"} stroke-width="1.5"/> <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15" stroke={color||"white"} stroke-width="1.5" stroke-linecap="round"/> </g>
+
 </svg>
   );
 

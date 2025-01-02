@@ -24,7 +24,7 @@ export const Landingpage = () => {
   const searchResults = location.state?.results || []; 
   const [movies, setMovies] = useState<MovieWithGenres[]>(searchResults);
   const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
-    
+  const [watchlist, setWatchlist] = useState<MovieWithGenres[]>([]); // Watchlist state
     const genreContainerRef = useRef<HTMLDivElement>(null);
 
 
@@ -42,6 +42,14 @@ export const Landingpage = () => {
       fetchMovies();
     }, [query]);
 
+
+    const handleAddToWatchlist = (movie: MovieWithGenres) => {
+      setWatchlist((prev) =>
+        prev.some((m) => m.id === movie.id) ? prev : [...prev, movie]
+      );
+      alert(`${movie.title} has been added to your watchlist!`);
+    };
+  
 
 const scrollCategory = (scrollOffset: number) => {
   if (genreContainerRef.current) {
@@ -143,6 +151,17 @@ const scrollCategory = (scrollOffset: number) => {
                   rating={movie.vote_average}
                   genre={movie.genreNames}
                   onClick={() => handleCardClick(movie.title)}
+                  onAddToWatchlist={() =>
+                    handleAddToWatchlist({
+                      id: movie.id,
+                    title: movie.title,
+                    poster_path: movie.poster_path,
+                    overview: movie.overview,
+                    release_date: movie.release_date,
+                    genreNames: movie.genreNames,
+                    vote_average: movie.vote_average,
+                    })
+                  }
                 />
               ))}
             </div>

@@ -11,7 +11,7 @@ interface MovieWithMood {
     poster_path: string;
     overview: string;
     release_date: string;
-    genreNames: string;
+    genreNames: string[];
     vote_average: number;
   }
 
@@ -19,6 +19,8 @@ export const Madeforyou = () => {
     const [selectedMood, setSelectedMood] = useState<string | null>(null);
     const [movies, setMovies] = useState<MovieWithMood[]>([]);
     const genreContainerRef = useRef<HTMLDivElement>(null);
+    const [watchlist, setWatchlist] = useState<MovieWithMood[]>([]); // Watchlist state
+
 
 
     const moods = [
@@ -53,9 +55,9 @@ export const Madeforyou = () => {
         const fetchMovies = async () => {
          try {
             const trendingMovies = await fetchTrendingMovies();
-            const processedMovies = trendingMovies.map((movie : MovieWithMood) => ({
+            const processedMovies = trendingMovies.map((movie : any)=>({
                 ...movie,
-                genreNames: movie.genreNames.split(',').map((genre) => genre.trim())
+                genreNames: movie.genreNames.split(',').map((genre : string) => genre.trim())
             }));
             setMovies(processedMovies);
         } catch (error) {
@@ -64,6 +66,14 @@ export const Madeforyou = () => {
     };
         fetchMovies();
       }, []);
+    
+
+      const handleAddToWatchlist = (movie: MovieWithMood) => {
+        setWatchlist((prev) =>
+          prev.some((m) => m.id === movie.id) ? prev : [...prev, movie]
+        );
+        alert(`${movie.title} has been added to your watchlist!`);
+      };
     
       const scrollCategory = (scrollOffset: number) => {
         if (genreContainerRef.current) {
@@ -126,6 +136,17 @@ export const Madeforyou = () => {
                 rating={movie.vote_average}
                 genre={Array.isArray(movie.genreNames) ? movie.genreNames.join(', ') : movie.genreNames} // Join genres back as string
                 onClick={() => handleCardClick(movie.title)}
+                onAddToWatchlist={() =>
+                  handleAddToWatchlist({
+                    id: movie.id,
+                  title: movie.title,
+                  poster_path: movie.poster_path,
+                  overview: movie.overview,
+                  release_date: movie.release_date,
+                  genreNames: movie.genreNames,
+                  vote_average: movie.vote_average,
+                  })
+                }
               />
             ))
           ) : (

@@ -4,11 +4,13 @@ import { Profile} from './pages/Profile/Profile'
 import { Signup } from './pages/Signup/signup'
 import { Signin } from './pages/Signin/Signin'
 import { Madeforyou } from './pages/Profile/madeforyou'
+import { WatchlistProvider } from './components/watchlistContext'
 import './App.css'
 
 function App() {
 
   return (
+    <WatchlistProvider>
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<Signup/>} />
@@ -18,6 +20,7 @@ function App() {
       <Route path="/madeforyou" element = {<Madeforyou/>} />
     </Routes>
     </BrowserRouter>
+    </WatchlistProvider>
   )
 }
 

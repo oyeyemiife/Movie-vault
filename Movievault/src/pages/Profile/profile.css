@@ -57,6 +57,36 @@
     font-weight: normal;
     margin-left: 0.5rem;
   }
+  .watchlist-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    z-index: 1000;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Crimson Text';
+  }
+  
+  .popup-content {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  
+  .close-popup {
+    background: #56706dfc;
+    color: #000000;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+  }
+  
   
   @media (max-width: 768px) {
     .profile-container {
