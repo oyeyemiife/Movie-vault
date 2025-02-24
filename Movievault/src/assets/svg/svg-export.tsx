@@ -1,3 +1,4 @@
+import React from "react";
 import { TSvgExports } from "./svg-types";
 
 export const StreakIcon = ({ width, height }: TSvgExports) => (
