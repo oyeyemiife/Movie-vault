@@ -6,6 +6,7 @@ import { Layout } from '../../components/Dashboard/layout';
 import background from '../../assets/Navbar/back.webp'
 import { useLocation } from 'react-router-dom';
 import { useWatchlist } from '../../components/watchlistContext';
+import React from 'react';
 
 
 

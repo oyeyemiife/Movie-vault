@@ -5,6 +5,7 @@ import background from '../../assets/Navbar/back.webp'
 import { Moviecard } from '../MovieCard/Moviecard'
 import { fetchTrendingMovies } from '../LandingPage/tmdbservice'
 import { useWatchlist } from '../../components/watchlistContext'
+import React from 'react'
 
 interface MovieWithMood {
     id: number;

@@ -3,6 +3,7 @@ import Logo from '../../assets/Navbar/logo.png'
 import { AccountIcon, Home, SearchIcon, StreakIcon } from '../../assets/svg/svg-export'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import React from 'react';
 
 export const Navbar = () => {
   const navigate = useNavigate();

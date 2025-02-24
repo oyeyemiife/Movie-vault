@@ -6,6 +6,7 @@ import { Signin } from './pages/Signin/Signin'
 import { Madeforyou } from './pages/Profile/madeforyou'
 import { WatchlistProvider } from './components/watchlistContext'
 import './App.css'
+import React from 'react'
 
 function App() {
 

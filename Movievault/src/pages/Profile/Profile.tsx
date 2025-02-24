@@ -3,6 +3,7 @@ import { Navbar } from '../../components/Navbar/navbar';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useWatchlist } from '../../components/watchlistContext';
+import React from 'react';
 
 
 export const Profile = () => {

@@ -1,5 +1,6 @@
 // src/context/WatchlistContext.tsx
 
+import React from "react";
 import { createContext, useContext, useState, ReactNode } from 'react';
 
 interface MovieWithGenres {

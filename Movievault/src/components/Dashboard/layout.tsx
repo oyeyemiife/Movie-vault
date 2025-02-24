@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { Navbar } from "../Navbar/navbar";
 import "./layout.css"
+import React from "react";
 
 export const Layout = ({ children, headerBg, headerText }: { children: ReactNode, headerBg?: string, headerText?: string }) => {
   return (
