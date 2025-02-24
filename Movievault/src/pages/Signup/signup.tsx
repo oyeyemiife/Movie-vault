@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import './signup.css'
 import { useNavigate } from 'react-router-dom'
+import { signup } from '../../services/authService'
+import React from 'react';
 
 interface SignupForm {
     email: string;
@@ -37,26 +39,18 @@ export const Signup = () => {
         }
 
         try {
-            const response = await fetch('YOUR_API_ENDPOINT/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: formData.email,
-                    password: formData.password,
-                    username: formData.username
-                }),
+            await signup({
+                username: formData.username,
+                email: formData.email,
+                password: formData.password
             });
-
-            if (response.ok) {
-                navigate('/signin');
+            navigate('/signin');
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setError(err.message);
             } else {
-                const data = await response.json();
-                setError(data.message || 'Signup failed');
+                setError('An unknown error occurred');
             }
-        } catch (err) {
-            setError('An error occurred during signup');
         }
     };
 
