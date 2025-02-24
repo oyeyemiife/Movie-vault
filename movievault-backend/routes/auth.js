@@ -33,9 +33,8 @@ router.post('/signup', async (req, res) => {
             message: 'User created successfully' 
         });
     } catch (error) {
-        res.status(500).json({ 
-            message: 'Error creating user' 
-        });
+        console.error('Error during signup:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
     }
 });
 
