@@ -1,43 +1,49 @@
 // src/context/WatchlistContext.tsx
 
-import  { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 
-interface Movie {
+interface MovieWithGenres {
   id: number;
   title: string;
-  posterUrl: string;
+  poster_path: string;
+  overview: string;
+  release_date: string;
+  genreNames: string;
+  vote_average: number;
 }
 
-interface WatchlistContextProps {
-  watchlist: Movie[];
-  addToWatchlist: (movie: Movie) => void;
+interface WatchlistContextType {
+  watchlist: MovieWithGenres[];
+  addToWatchlist: (movie: MovieWithGenres) => void;
+  removeFromWatchlist: (movieId: number) => void;
 }
 
-const WatchlistContext = createContext<WatchlistContextProps | undefined>(undefined);
+const WatchlistContext = createContext<WatchlistContextType | undefined>(undefined);
 
-export const WatchlistProvider = ({ children }: { children: ReactNode }) => {
-  const [watchlist, setWatchlist] = useState<Movie[]>([]);
+export function WatchlistProvider({ children }: { children: ReactNode }) {
+  const [watchlist, setWatchlist] = useState<MovieWithGenres[]>([]);
 
-  const addToWatchlist = (movie: Movie) => {
-    setWatchlist((prev) => {
-      if (!prev.find((item) => item.id === movie.id)) {
-        return [...prev, movie];
-      }
-      return prev;
-    });
+  const addToWatchlist = (movie: MovieWithGenres) => {
+    setWatchlist((prev) =>
+      prev.some((m) => m.id === movie.id) ? prev : [...prev, movie]
+    );
+  };
+
+  const removeFromWatchlist = (movieId: number) => {
+    setWatchlist((prev) => prev.filter((movie) => movie.id !== movieId));
   };
 
   return (
-    <WatchlistContext.Provider value={{ watchlist, addToWatchlist }}>
+    <WatchlistContext.Provider value={{ watchlist, addToWatchlist, removeFromWatchlist }}>
       {children}
     </WatchlistContext.Provider>
   );
-};
+}
 
-export const useWatchlist = () => {
+export function useWatchlist() {
   const context = useContext(WatchlistContext);
-  if (!context) {
+  if (context === undefined) {
     throw new Error('useWatchlist must be used within a WatchlistProvider');
   }
   return context;
-};
+}

@@ -5,6 +5,7 @@ import { fetchTrendingMovies, searchMovies } from './tmdbservice';
 import { Layout } from '../../components/Dashboard/layout';
 import background from '../../assets/Navbar/back.webp'
 import { useLocation } from 'react-router-dom';
+import { useWatchlist } from '../../components/watchlistContext';
 
 
 
@@ -24,7 +25,7 @@ export const Landingpage = () => {
   const searchResults = location.state?.results || []; 
   const [movies, setMovies] = useState<MovieWithGenres[]>(searchResults);
   const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
-  const [watchlist, setWatchlist] = useState<MovieWithGenres[]>([]); // Watchlist state
+  const { addToWatchlist } = useWatchlist();
     const genreContainerRef = useRef<HTMLDivElement>(null);
 
 
@@ -44,9 +45,7 @@ export const Landingpage = () => {
 
 
     const handleAddToWatchlist = (movie: MovieWithGenres) => {
-      setWatchlist((prev) =>
-        prev.some((m) => m.id === movie.id) ? prev : [...prev, movie]
-      );
+      addToWatchlist(movie);
       alert(`${movie.title} has been added to your watchlist!`);
     };
   

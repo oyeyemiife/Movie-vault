@@ -15,6 +15,11 @@ type MovieCardProps = {
 
 
   export const Moviecard: React.FC<MovieCardProps> = ({ title, posterUrl,year, rating, genre, onClick, onAddToWatchlist }) => {
+    const handleWatchlistClick = (e: React.MouseEvent) => {
+        e.stopPropagation(); // This prevents the parent onClick from firing
+        onAddToWatchlist();
+    };
+
     return (
         <div className="movie-card" onClick={onClick}>
         <img src={posterUrl} alt={title} className="movie-poster" />
@@ -23,7 +28,7 @@ type MovieCardProps = {
         <p className='movie-title'>{year}</p>
         <p className="movie-genre">{genre}</p>
         <p className="movie-rating"><StarIcon/> {rating.toFixed(1)}</p>
-        <p onClick={onAddToWatchlist} title='watchlist'><WatchlistIcon/></p>
+        <p onClick={handleWatchlistClick} title='watchlist'><WatchlistIcon/></p>
     </div>
     </div>
   )
